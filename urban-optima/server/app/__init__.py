@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 from flask_cors import CORS
 import logging
 
@@ -14,6 +14,13 @@ def create_app():
     @app.route("/")
     def home():
         return "Urban Optima Backend Running"
+
+    @app.after_request
+    def add_private_network_header(response):
+        # Allow Private Network Access preflight when UI is served from LAN IP.
+        if request.headers.get("Access-Control-Request-Private-Network") == "true":
+            response.headers["Access-Control-Allow-Private-Network"] = "true"
+        return response
 
     # Register Blueprints
     from .routes.waste import waste_bp

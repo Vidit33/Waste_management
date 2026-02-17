@@ -97,30 +97,78 @@ Tools: **Chart.js**, **D3.js**, **Plotly Dash**, **Mapbox** for geospatial mappi
 - Python 3.9+
 - pip / virtualenv
 
-### Setup Instructions
+### Setup Instructions (Monorepo)
 ```bash
 # 1. Clone the Repository
 git clone https://github.com/your-username/urbanoptima.git
 cd urbanoptima
-# 2. Frontend Setup
-cd client
-npm install
-npm run dev
-# 3. Backend Setup
+
+# 2. Backend Setup
 cd server
-pip install -r requirements.txt 
-python -m app
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+
+# 3. Frontend Setup (in a new terminal)
+cd ../ui
+npm install
+npm run dev -- --host
 ```
 
-### Configration Setup
-Before running the backend, create a configuration file to store your API keys.
-Inside server/app/, create a new file named config.py
-Paste the following code inside it:
+### Environment Variables
+The backend reads API keys from environment variables (no config file required).
+
 ```bash
-WEATHER_API_KEY = "your_weather_api_key_here"
-ORS_API_KEY = "your_openrouteservice_api_key_here"
+export WEATHER_API_KEY="your_openweather_key"
+export TOMTOM_API_KEY="your_tomtom_key"
+export ORS_API_KEY="your_openrouteservice_key"
 ```
-Replace the placeholders (your_weather_api_key_here, your_openrouteservice_api_key_here) with your actual API keys.
+
+### Run Air Module (backend + UI)
+```bash
+# 1. Kill any process using port 5000
+lsof -ti:5000 | xargs -r kill -9
+
+# 2. Start backend with OpenWeather key
+cd server
+source venv/bin/activate
+export WEATHER_API_KEY="your_openweather_key"
+python3 run.py
+```
+
+```bash
+# 3. Start UI (new terminal)
+cd ui
+npm run dev -- --host
+```
+
+Open in browser:
+- http://localhost:5173/air
+
+### Run Traffic Module (backend + UI)
+```bash
+# 1. Kill any process using port 5000
+lsof -ti:5000 | xargs -r kill -9
+
+# 2. Start backend with TomTom + ORS keys
+cd server
+source venv/bin/activate
+export TOMTOM_API_KEY="your_tomtom_key"
+export ORS_API_KEY="your_openrouteservice_key"
+python3 run.py
+```
+
+```bash
+# 3. Start UI (new terminal)
+cd ui
+npm run dev -- --host
+```
+
+Open in browser:
+- http://localhost:5173/traffic
+
+### Troubleshooting
+- If port 5000 is blocked by macOS Control Center, disable AirPlay Receiver in System Settings.
 
 ### 📌 Future Plans
  Integrate Dash/Power BI for advanced visualizations

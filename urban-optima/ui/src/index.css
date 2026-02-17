@@ -1,0 +1,45 @@
+/* index.css */
+@import url('https://fonts.googleapis.com/css2?family=Limelight&family=Merienda&family=Yatra+One&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.try{
+    color: black;
+    background-color: aqua;
+
+}
+body{
+    background-color: #fffcea;
+}
+/* In your global CSS or Tailwind's CSS file */
+.text-shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Example text shadow */
+}
+  
+/* In your Tailwind config or CSS file */
+@keyframes shine {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+/* @keyframes pulse {
+  0% {
+    transform: scaleY(1);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scaleY(1.05);
+    opacity: 1;
+  }
+} */
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.6; }
+}

@@ -132,14 +132,14 @@ lsof -ti:5000 | xargs -r kill -9
 # 2. Start backend with OpenWeather key
 cd server
 source venv/bin/activate
-export WEATHER_API_KEY="your_openweather_key"
+export WEATHER_API_KEY=55259165b7d8c80d53e7064bde6dc540
 python3 run.py
 ```
 
 ```bash
 # 3. Start UI (new terminal)
 cd ui
-npm run dev -- --host
+npm run dev
 ```
 
 Open in browser:
@@ -153,15 +153,15 @@ lsof -ti:5000 | xargs -r kill -9
 # 2. Start backend with TomTom + ORS keys
 cd server
 source venv/bin/activate
-export TOMTOM_API_KEY="your_tomtom_key"
-export ORS_API_KEY="your_openrouteservice_key"
+export TOMTOM_API_KEY=55259165b7d8c80d53e7064bde6dc540
+export ORS_API_KEY=eyJvcmciOiI1YjNjZTM1OTc4NTExMTAwMDFjZjYyNDgiLCJpZCI6ImZmY2UwYzU1NDJhZjRkMjViZTY2ODU3YTMxNzhmYWYxIiwiaCI6Im11cm11cjY0In0=
 python3 run.py
 ```
 
 ```bash
 # 3. Start UI (new terminal)
 cd ui
-npm run dev -- --host
+npm run dev
 ```
 
 Open in browser:
